@@ -20,7 +20,7 @@
         },
         {
           "name": "removeTransparent",
-          "threthold": 1
+          "threthold": 128
         },
         {
           "name": "removeSpecialColor"

@@ -1,11 +1,11 @@
 import json
-import sys
-from PIL import Image, ImageDraw, ImageColor
-from SpecialColor import (
+from PIL import Image, ImageDraw
+from src.SpecialColor import (
     SPECIAL_COLORS,
     TRANSPARENT_COLOR,
 )
 from typing import Final
+import logging
 
 
 class BaseProcessor:
@@ -52,7 +52,7 @@ class MergeImage(ImageProcessor):
                 addImage = self.doResize(addImage, canvas.size)
             if self.offset != (0, 0):  # オフセット指定があれば追加画像をずらす
                 addImage = self.doOffset(addImage)
-            sys.stdout.write("\t\t'{0}' merged.\n".format(path))
+            logging.info("'{0}' merged.".format(path))
             canvas = Image.alpha_composite(
                 canvas.convert("RGBA"), addImage.convert("RGBA")
             )
@@ -113,7 +113,7 @@ class RemoveSpecialColor(PixelProcessor):
         super().__init__(data)
 
     def handlePixel(self, draw, xy, pixel):
-        if (pixel[0],pixel[1],pixel[2]) in SPECIAL_COLORS:
+        if (pixel[0], pixel[1], pixel[2]) in SPECIAL_COLORS:
             draw.point(
                 xy,
                 (
@@ -154,11 +154,6 @@ class MergeDefinitionLoader:
         self.version: int = data["version"]
         self.comment: str | None = data.get("comment")
         self.definitions: list[Definition] = list(map(Definition, data["definitions"]))
-        sys.stdout.write(
-            "'{0}' load successed.\ndefinition version is {1}.\n".format(
-                self.path, self.version
-            )
-        )
 
     def getDefinitions(self) -> list[Definition]:
         return self.definitions

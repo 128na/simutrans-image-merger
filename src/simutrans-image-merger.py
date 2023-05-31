@@ -1,29 +1,36 @@
 import sys
 from typing import Final
-
 from PIL import Image, ImageDraw
-from MergeDefinition import (
+import logging
+
+logging.basicConfig(
+    format="[%(asctime)s] %(levelname)s: %(funcName)s: %(message)s", level=logging.INFO
+)
+sys.path.append("./")
+
+from src.MergeDefinition import (
     MergeDefinitionLoader,
     Definition,
     ImageProcessor,
     PixelProcessor,
 )
 
-import psutil
-
 
 def run():
     if len(sys.argv) < 2:
         raise Exception("json file path not provided.")
 
-    definitions: Final[list[Definition]] = MergeDefinitionLoader(
-        sys.argv[1]
-    ).getDefinitions()
+    loader: Final[MergeDefinitionLoader] = MergeDefinitionLoader(sys.argv[1])
+    definitions: Final[list[Definition]] = loader.getDefinitions()
+
+    logging.info(
+        "definition file load successed. version is {0}.".format(loader.version)
+    )
 
     for definition in definitions:
-        sys.stdout.write("start processing '{0}'.\n".format(definition.outputPath))
+        logging.info("start processing for '{0}'.".format(definition.outputPath))
         runDefinition(definition)
-        sys.stdout.write("saved '{0}'.\n".format(definition.outputPath))
+        logging.info("file saved '{0}'.".format(definition.outputPath))
 
 
 def runDefinition(definition: Definition):
@@ -32,17 +39,15 @@ def runDefinition(definition: Definition):
     pixelProcessors: list[PixelProcessor] = []
     for processor in definition.processors:
         if isinstance(processor, PixelProcessor):
-            sys.stdout.write(
-                "\tEnqueue pixel processor '{0}'.\n".format(processor.name)
-            )
+            logging.info("Enqueue pixel processor '{0}'.".format(processor.name))
             pixelProcessors.append(processor)
         else:
             if len(pixelProcessors) > 0:
-                sys.stdout.write("\tApply pixel processors.\n")
+                logging.info("Apply pixel processors.")
                 runPixelProcessors(pixelProcessors, result)
                 pixelProcessors.clear()
         if isinstance(processor, ImageProcessor):
-            sys.stdout.write("\tApply image processor '{0}'.\n".format(processor.name))
+            logging.info("Apply image processor '{0}'.".format(processor.name))
             result = processor.handleImage(result)
     result.save(definition.outputPath)
 
@@ -64,7 +69,4 @@ def runPixelProcessors(
 
 
 if __name__ == "__main__":
-    m1 = psutil.virtual_memory()
     run()
-    m2 = psutil.virtual_memory()
-    print(f"memory used {0}".format(m2.used - m1.used))
