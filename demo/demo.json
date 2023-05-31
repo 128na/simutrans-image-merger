@@ -2,16 +2,16 @@
   "version": 1,
   "definitions": [
     {
-      "outputPath": "Z:\\dev\\simutrans\\simutrans-image-merger\\demo\\merge.png",
+      "outputPath": "demo\\merge.png",
       "rules": [
         {
           "name": "mergeImage",
           "mode": "normal",
           "comment": "demo",
           "pathes": [
-            "Z:\\dev\\simutrans\\simutrans-image-merger\\demo\\1.png",
-            "Z:\\dev\\simutrans\\simutrans-image-merger\\demo\\2.png",
-            "Z:\\dev\\simutrans\\simutrans-image-merger\\demo\\3.png"
+            "demo\\1.png",
+            "demo\\2.png",
+            "demo\\3.png"
           ],
           "offset": {
             "x": 0,
@@ -29,7 +29,7 @@
           "name": "mergeImage",
           "mode": "normal",
           "pathes": [
-            "Z:\\dev\\simutrans\\simutrans-image-merger\\demo\\4.png"
+            "demo\\4.png"
           ],
           "offset": {
             "x": 16,
