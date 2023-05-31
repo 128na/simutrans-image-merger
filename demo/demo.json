@@ -12,11 +12,15 @@
             "Z:\\dev\\simutrans\\simutrans-image-merger\\demo\\1.png",
             "Z:\\dev\\simutrans\\simutrans-image-merger\\demo\\2.png",
             "Z:\\dev\\simutrans\\simutrans-image-merger\\demo\\3.png"
-          ]
+          ],
+          "offset": {
+            "x": 0,
+            "y": 0
+          }
         },
         {
           "name": "removeTransparent",
-          "threthold": 128
+          "threthold": 1
         },
         {
           "name": "removeSpecialColor"
@@ -26,16 +30,20 @@
           "mode": "normal",
           "pathes": [
             "Z:\\dev\\simutrans\\simutrans-image-merger\\demo\\4.png"
-          ]
+          ],
+          "offset": {
+            "x": 16,
+            "y": 16
+          }
         },
         {
           "name": "replaceColor",
-          "from": {
+          "search": {
             "r": 0,
             "g": 0,
             "b": 255
           },
-          "to": {
+          "replace": {
             "r": 0,
             "g": 0,
             "b": 128
