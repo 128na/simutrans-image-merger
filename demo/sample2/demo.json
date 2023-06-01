@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "definitions": [
+    {
+      "outputPath": "demo\\sample2\\merge.png",
+      "rules": [
+        {
+          "name": "mergeImage",
+          "mode": "normal",
+          "comment": "demo",
+          "pathes": [
+            "demo\\sample2\\1.png",
+            "demo\\sample2\\2.png",
+            "demo\\sample2\\3.png",
+            "demo\\sample2\\4.png"
+          ],
+          "offset": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "name": "replaceColor",
+          "search": {
+            "r": 255,
+            "g": 0,
+            "b": 0
+          },
+          "replace": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 0
+          }
+        },
+        {
+          "name": "mergeImage",
+          "mode": "normal",
+          "pathes": [
+            "demo\\sample2\\5.png",
+            "demo\\sample2\\6.png"
+          ],
+          "offset": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "name": "removeTransparent",
+          "threthold": 128
+        },
+        {
+          "name": "removeSpecialColor"
+        }
+      ]
+    }
+  ]
+}

@@ -2,16 +2,16 @@
   "version": 1,
   "definitions": [
     {
-      "outputPath": "demo\\merge.png",
+      "outputPath": "demo\\sample1\\merge.png",
       "rules": [
         {
           "name": "mergeImage",
           "mode": "normal",
           "comment": "demo",
           "pathes": [
-            "demo\\1.png",
-            "demo\\2.png",
-            "demo\\3.png"
+            "demo\\sample1\\1.png",
+            "demo\\sample1\\2.png",
+            "demo\\sample1\\3.png"
           ],
           "offset": {
             "x": 0,
@@ -29,7 +29,7 @@
           "name": "mergeImage",
           "mode": "normal",
           "pathes": [
-            "demo\\4.png"
+            "demo\\sample1\\4.png"
           ],
           "offset": {
             "x": 16,
@@ -46,7 +46,8 @@
           "replace": {
             "r": 0,
             "g": 0,
-            "b": 128
+            "b": 128,
+            "a": 255
           }
         }
       ]
