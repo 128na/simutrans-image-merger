@@ -3,9 +3,7 @@ from typing import Final
 from PIL import Image, ImageDraw
 import logging
 
-logging.basicConfig(
-    format="[%(asctime)s] %(levelname)s: %(funcName)s: %(message)s", level=logging.INFO
-)
+logging.basicConfig(format="%(funcName)s: %(message)s", level=logging.INFO)
 sys.path.append("./")
 
 from src.MergeDefinition import (
@@ -49,6 +47,10 @@ def runDefinition(definition: Definition):
         if isinstance(processor, ImageProcessor):
             logging.info("Apply image processor '{0}'.".format(processor.name))
             result = processor.handleImage(result)
+    if len(pixelProcessors) > 0:
+        logging.info("Apply pixel processors.")
+        runPixelProcessors(pixelProcessors, result)
+
     result.save(definition.outputPath)
 
 
