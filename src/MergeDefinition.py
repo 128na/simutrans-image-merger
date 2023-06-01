@@ -10,7 +10,6 @@ import logging
 
 class BaseProcessor:
     def __init__(self, data: dict) -> None:
-        self.modifyPixel: Final[bool] = False
         self.name: Final[str] = data["name"]
         self.comment: Final[str] | None = data.get("comment")
 
@@ -20,6 +19,11 @@ class ImageProcessor(BaseProcessor):
 
     def handleImage(self, canvas: Image.Image) -> Image.Image:
         return canvas
+
+    def doResize(self, original: Image.Image, size: tuple[int, int]) -> Image.Image:
+        newImage = Image.new("RGBA", size)
+        newImage.paste(original, (0, 0), original)
+        return newImage
 
 
 class PixelProcessor(BaseProcessor):
@@ -57,11 +61,6 @@ class MergeImage(ImageProcessor):
                 canvas.convert("RGBA"), addImage.convert("RGBA")
             )
         return canvas
-
-    def doResize(self, original: Image.Image, size: tuple[int, int]) -> Image.Image:
-        newImage = Image.new("RGBA", size)
-        newImage.paste(original, (0, 0), original)
-        return newImage
 
     def doOffset(self, original: Image.Image) -> Image.Image:
         newImage = Image.new("RGBA", original.size)
