@@ -9,10 +9,10 @@
           "mode": "normal",
           "comment": "demo",
           "pathes": [
-            "demo\\sample2\\1.png",
-            "demo\\sample2\\2.png",
-            "demo\\sample2\\3.png",
-            "demo\\sample2\\4.png"
+            "demo\\sample2\\base.png",
+            "demo\\sample2\\noise.png",
+            "demo\\sample2\\lines.png",
+            "demo\\sample2\\crop.png"
           ],
           "offset": {
             "x": 0,
@@ -21,6 +21,7 @@
         },
         {
           "name": "replaceColor",
+          "coment": "replace crop color to transparent",
           "search": {
             "r": 255,
             "g": 0,
@@ -37,8 +38,8 @@
           "name": "mergeImage",
           "mode": "normal",
           "pathes": [
-            "demo\\sample2\\5.png",
-            "demo\\sample2\\6.png"
+            "demo\\sample2\\back_barrier.png",
+            "demo\\sample2\\front_barrier.png"
           ],
           "offset": {
             "x": 0,
