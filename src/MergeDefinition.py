@@ -1,6 +1,6 @@
 import json
 from PIL import Image, ImageDraw
-from src.SpecialColor import (
+from src.SimutransColor import (
     SPECIAL_COLORS,
     TRANSPARENT_COLOR,
 )
@@ -102,7 +102,7 @@ class ReplaceColor(PixelProcessor):
         )
 
     def handlePixel(self, draw, xy, pixel):
-        if pixel == self.search:
+        if (pixel[0], pixel[1], pixel[2]) == self.search:
             draw.point(xy, self.replace)
 
 
