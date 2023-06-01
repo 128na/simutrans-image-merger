@@ -95,10 +95,11 @@ class ReplaceColor(PixelProcessor):
             data["search"]["g"],
             data["search"]["b"],
         )
-        self.replace: tuple[int, int, int] = (
+        self.replace: tuple[int, int, int, int] = (
             data["replace"]["r"],
             data["replace"]["g"],
             data["replace"]["b"],
+            data["replace"]["a"],
         )
 
     def handlePixel(self, draw, xy, pixel):

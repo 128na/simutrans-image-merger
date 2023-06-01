@@ -57,7 +57,7 @@ def runDefinition(definition: Definition):
 def runPixelProcessors(
     processors: list[PixelProcessor], result: Image.Image
 ) -> Image.Image:
-    draw: ImageDraw.ImageDraw = ImageDraw.Draw(result)
+    draw: ImageDraw.ImageDraw = ImageDraw.Draw(result, 'RGBA')
     data: Final[list[tuple[int, int, int, int]]] = list(result.getdata())
     xy: tuple[int, int] = (0, 0)
     w = result.size[0]

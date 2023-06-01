@@ -13,7 +13,7 @@ simutrans-image-merger.exe definition.json
 
 ### 設定jsonフォーマット
 
-参考：[demo/demo.json](demo/demo.json)
+参考：[demo/](demo/)
 
 ## 開発者向け
 npm が導入済みであればスクリプトで実行できます。
