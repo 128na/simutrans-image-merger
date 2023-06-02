@@ -14,10 +14,11 @@ from src.MergeDefinition import (
 )
 
 from src.Logger import stdoutLogger, stderrLogger
+from src.setting import appVersion
 
 
 def run():
-    greeting = "simutrans image merger version %%APP_VERSION%%."
+    greeting = "simutrans image merger version {0}.".format(appVersion)
     parser = argparse.ArgumentParser(description=greeting)
     parser.add_argument("jsonPath", type=str, help="path to definition json file")
     args = parser.parse_args()

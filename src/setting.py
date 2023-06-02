@@ -1,0 +1,1 @@
+appVersion="%%APP_VERSION%%"
