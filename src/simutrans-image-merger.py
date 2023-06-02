@@ -1,9 +1,8 @@
 import sys
 from typing import Final
 from PIL import Image, ImageDraw
-import logging
+import argparse
 
-logging.basicConfig(format="%(funcName)s: %(message)s", level=logging.INFO)
 sys.path.append("./")
 
 from src.MergeDefinition import (
@@ -13,22 +12,34 @@ from src.MergeDefinition import (
     PixelProcessor,
 )
 
+from src.Logger import stdoutLogger, stderrLogger
+from src.version import version
+
 
 def run():
-    if len(sys.argv) < 2:
-        raise Exception("json file path not provided.")
-
-    loader: Final[MergeDefinitionLoader] = MergeDefinitionLoader(sys.argv[1])
-    definitions: Final[list[Definition]] = loader.getDefinitions()
-
-    logging.info(
-        "definition file load successed. version is {0}.".format(loader.version)
+    parser = argparse.ArgumentParser(
+        description="simutrans image merger version {0}.".format(version)
     )
+    parser.add_argument("jsonPath", type=str, help="path to definition json file")
+    args = parser.parse_args()
+    try:
+        loader: Final[MergeDefinitionLoader] = MergeDefinitionLoader(args.jsonPath)
+        definitions: Final[list[Definition]] = loader.getDefinitions()
 
-    for definition in definitions:
-        logging.info("start processing for '{0}'.".format(definition.outputPath))
-        runDefinition(definition)
-        logging.info("file saved '{0}'.".format(definition.outputPath))
+        stdoutLogger.info(
+            "definition file load successed. version is {0}.".format(loader.version)
+        )
+
+        for definition in definitions:
+            stdoutLogger.info(
+                "start processing for '{0}'.".format(definition.outputPath)
+            )
+            runDefinition(definition)
+            stdoutLogger.info("file saved '{0}'.".format(definition.outputPath))
+
+    except Exception as e:
+        stderrLogger.error("merge failed")
+        raise e
 
 
 def runDefinition(definition: Definition):
@@ -37,18 +48,18 @@ def runDefinition(definition: Definition):
     pixelProcessors: list[PixelProcessor] = []
     for processor in definition.processors:
         if isinstance(processor, PixelProcessor):
-            logging.info("Enqueue pixel processor '{0}'.".format(processor.name))
+            stdoutLogger.info("Enqueue pixel processor '{0}'.".format(processor.name))
             pixelProcessors.append(processor)
         else:
             if len(pixelProcessors) > 0:
-                logging.info("Apply pixel processors.")
+                stdoutLogger.info("Apply pixel processors.")
                 runPixelProcessors(pixelProcessors, result)
                 pixelProcessors.clear()
         if isinstance(processor, ImageProcessor):
-            logging.info("Apply image processor '{0}'.".format(processor.name))
+            stdoutLogger.info("Apply image processor '{0}'.".format(processor.name))
             result = processor.handleImage(result)
     if len(pixelProcessors) > 0:
-        logging.info("Apply pixel processors.")
+        stdoutLogger.info("Apply pixel processors.")
         runPixelProcessors(pixelProcessors, result)
 
     result.save(definition.outputPath)

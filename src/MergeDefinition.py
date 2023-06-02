@@ -5,7 +5,7 @@ from src.SimutransColor import (
     TRANSPARENT_COLOR,
 )
 from typing import Final
-import logging
+from src.Logger import stdoutLogger, stderrLogger
 
 
 class BaseProcessor:
@@ -56,7 +56,7 @@ class MergeImage(ImageProcessor):
                 addImage = self.doResize(addImage, canvas.size)
             if self.offset != (0, 0):  # オフセット指定があれば追加画像をずらす
                 addImage = self.doOffset(addImage)
-            logging.info("'{0}' merged.".format(path))
+            # stdoutLogger.debug("'{0}' merged.".format(path))
             canvas = Image.alpha_composite(
                 canvas.convert("RGBA"), addImage.convert("RGBA")
             )
@@ -79,9 +79,11 @@ class RemoveTransparent(PixelProcessor):
         if pixel[3] == 255:  # 不透過はそのまま
             return draw
         if pixel[3] >= self.threthold:  # 半透過は閾値以上は塗りつぶす
+            # stdoutLogger.debug("to fill: {0}".format(pixel))
             return draw.point(xy, (pixel[0], pixel[1], pixel[2], 255))
-        else:  # 閾値未満は透過色にする
-            return draw.point(xy, TRANSPARENT_COLOR)
+        # 閾値未満は透過色にする
+        # stdoutLogger.debug("to transparent: {0}".format(pixel))
+        return draw.point(xy, TRANSPARENT_COLOR)
 
 
 class ReplaceColor(PixelProcessor):
@@ -104,6 +106,7 @@ class ReplaceColor(PixelProcessor):
     def handlePixel(self, draw, xy, pixel):
         if (pixel[0], pixel[1], pixel[2]) == self.search:
             draw.point(xy, self.replace)
+            # stdoutLogger.debug("replace color: {0}".format(pixel))
 
 
 class RemoveSpecialColor(PixelProcessor):
@@ -114,6 +117,7 @@ class RemoveSpecialColor(PixelProcessor):
 
     def handlePixel(self, draw, xy, pixel):
         if (pixel[0], pixel[1], pixel[2]) in SPECIAL_COLORS:
+            # stdoutLogger.debug("remove special: {0}".format(pixel))
             draw.point(
                 xy,
                 (
