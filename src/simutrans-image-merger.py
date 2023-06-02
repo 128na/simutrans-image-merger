@@ -5,7 +5,7 @@ import argparse
 import os
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path=".env.ci")
+load_dotenv()
 
 sys.path.append("./")
 
