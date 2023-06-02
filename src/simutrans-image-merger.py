@@ -2,10 +2,7 @@ import sys
 from typing import Final
 from PIL import Image, ImageDraw
 import argparse
-import os
-from dotenv import load_dotenv
 
-load_dotenv()
 
 sys.path.append("./")
 
@@ -20,7 +17,7 @@ from src.Logger import stdoutLogger, stderrLogger
 
 
 def run():
-    greeting = "simutrans image merger version {0}.".format(os.environ["APP_VERSION"])
+    greeting = "simutrans image merger version %%APP_VERSION%%."
     parser = argparse.ArgumentParser(description=greeting)
     parser.add_argument("jsonPath", type=str, help="path to definition json file")
     args = parser.parse_args()
