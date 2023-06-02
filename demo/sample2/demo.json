@@ -62,8 +62,7 @@
           "name": "mergeImage",
           "mode": "normal",
           "comment": "demo",
-          "pathes": [
-          ],
+          "pathes": [],
           "offset": {
             "x": 0,
             "y": 0
