@@ -1,8 +1,7 @@
 import json
-from typing import Final
 from jsonschema import validate, exceptions
-import os
 import sys
+from src.schema import schemaV1
 
 
 def validateDefinition(jsonPath: str):
@@ -19,10 +18,8 @@ def validateDefinition(jsonPath: str):
 
 
 def getSchema(data: dict):
-    dirPath = os.path.dirname(os.path.realpath(__file__))
     version = data.get("version")
     if version == 1:
-        schemaPath = os.path.join(dirPath, "schemas", "mergeDefinition_v1.json")
-        return json.load(open(schemaPath, "r"))
+        return json.loads(schemaV1)
 
     raise Exception(f"invalid version provided: {version}")

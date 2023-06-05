@@ -1,3 +1,5 @@
+# pyinstallerでパッケージ化後のファイル読み込み回りが煩雑になるので文字列で格納しておく
+schemaV1 = """
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "SimutransImageMerger MergeDefinition Schema v1",
@@ -232,3 +234,4 @@
     "definitions"
   ]
 }
+"""
