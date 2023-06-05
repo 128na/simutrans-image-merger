@@ -10,8 +10,7 @@ def validateDefinition(jsonPath: str):
 
     try:
         validate(data, schema)
-        sys.stdout.write("validation passed")
-        sys.exit(0)
+        sys.stdout.write("validation passed\n")
     except exceptions.ValidationError as error:
         print(error)
         sys.exit(1)
