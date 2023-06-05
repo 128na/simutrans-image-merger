@@ -1,7 +1,7 @@
 import json
 from jsonschema import validate, exceptions
 import sys
-from src.schema import schemaV1
+from src.Schema import schemaV1
 
 
 def validateDefinition(jsonPath: str):

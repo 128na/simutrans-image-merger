@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "definitions": [
+    {
+      "outputPath": "demo\\sample2\\merge.png",
+      "rules": [
+        {
+          "name": "mergeImage",
+          "mode": "normal",
+          "comment": "demo",
+          "pathes": [
+            false
+          ],
+          "offset": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "name": "replaceColor",
+          "coment": "replace crop color to transparent",
+          "search": {
+            "r": 255,
+            "g": 0,
+            "b": 0
+          },
+          "replace": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 0
+          }
+        },
+        {
+          "name": "mergeImage",
+          "mode": "normal",
+          "pathes": [
+            "demo\\sample2\\back_barrier.png",
+            "demo\\sample2\\front_barrier.png"
+          ],
+          "offset": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "name": "removeTransparent",
+          "threthold": 128
+        },
+        {
+          "name": "removeSpecialColor"
+        }
+      ]
+    },
+    {
+      "outputPath": "demo\\sample2\\merge2.png",
+      "rules": [
+        {
+          "name": "mergeImage",
+          "mode": "normal",
+          "comment": "demo",
+          "pathes": [],
+          "offset": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "name": "replaceColor",
+          "coment": "replace crop color to transparent",
+          "search": {
+            "r": 255,
+            "g": 0,
+            "b": 0
+          },
+          "replace": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 0
+          }
+        },
+        {
+          "name": "mergeImage",
+          "mode": "normal",
+          "pathes": [
+            "demo\\sample2\\back_barrier.png",
+            "demo\\sample2\\front_barrier.png"
+          ],
+          "offset": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "name": "removeTransparent",
+          "threthold": 128
+        },
+        {
+          "name": "removeSpecialColor"
+        }
+      ]
+    }
+  ],
+  "comment": "a"
+}

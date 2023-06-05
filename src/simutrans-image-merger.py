@@ -91,4 +91,5 @@ if __name__ == "__main__":
     if args.validate:
         validateDefinition(args.jsonPath)
     else:
+        validateDefinition(args.jsonPath)
         run(args.jsonPath)
