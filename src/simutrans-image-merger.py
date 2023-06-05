@@ -15,17 +15,14 @@ from src.MergeDefinition import (
 
 from src.Logger import stdoutLogger, stderrLogger
 from src.setting import appVersion
+from src.Validator import validateDefinition
 
 
-def run():
-    greeting = "simutrans image merger version {0}.".format(appVersion)
-    parser = argparse.ArgumentParser(description=greeting)
-    parser.add_argument("jsonPath", type=str, help="path to definition json file")
-    args = parser.parse_args()
+def run(jsonPath: str):
     try:
         stdoutLogger.info(greeting)
 
-        loader: Final[MergeDefinitionLoader] = MergeDefinitionLoader(args.jsonPath)
+        loader: Final[MergeDefinitionLoader] = MergeDefinitionLoader(jsonPath)
         definitions: Final[list[Definition]] = loader.getDefinitions()
 
         stdoutLogger.info(
@@ -84,4 +81,14 @@ def runPixelProcessors(
 
 
 if __name__ == "__main__":
-    run()
+    greeting = "simutrans image merger version {0}.".format(appVersion)
+    parser = argparse.ArgumentParser(description=greeting)
+    parser.add_argument("jsonPath", type=str, help="path to definition json file")
+    parser.add_argument(
+        "-v", "--validate", action="store_true", help="validate definition json file"
+    )
+    args = parser.parse_args()
+    if args.validate:
+        validateDefinition(args.jsonPath)
+    else:
+        run(args.jsonPath)

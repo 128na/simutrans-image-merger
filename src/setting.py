@@ -1,1 +1,1 @@
-appVersion="%%APP_VERSION%%"
+appVersion = "%%APP_VERSION%%"
