@@ -1,4 +1,4 @@
 black==24.3.0
 Pillow==10.3.0
 pyinstaller==6.5.0
-pyinstaller-hooks-contrib==2024.3
+pyinstaller-hooks-contrib==2024.4
