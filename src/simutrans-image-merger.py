@@ -3,7 +3,6 @@ from typing import Final
 from PIL import Image, ImageDraw
 import argparse
 
-
 sys.path.append("./")
 
 from src.MergeDefinition import (

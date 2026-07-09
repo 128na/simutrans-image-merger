@@ -11,3 +11,18 @@ updates:
       interval: "weekly"
     assignees:
       - "128na"
+    groups:
+      pip:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    assignees:
+      - "128na"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
