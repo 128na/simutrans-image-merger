@@ -3,3 +3,4 @@ Pillow==12.3.0
 pyinstaller==6.21.0
 pyinstaller-hooks-contrib==2026.6
 jsonschema==4.26.0
+pytest==9.1.1

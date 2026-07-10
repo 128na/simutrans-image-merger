@@ -2,6 +2,7 @@
   "description": "install scripts for simutrans-image-marger",
   "scripts": {
     "py:lint": "black ./src",
+    "py:test": "pytest ./tests",
     "py:freeze": "pip freeze > requirements.txt",
     "py:install": "pip install -r requirements.txt",
     "py:build": "pyinstaller -F ./src/simutrans-image-merger.py"
