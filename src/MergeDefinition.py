@@ -50,14 +50,17 @@ class MergeImage(ImageProcessor):
     def handleImage(self, canvas):
         for path in self.pathes:
             addImage = Image.open(path)
-            if (
-                addImage.size > canvas.size
-            ):  # 追加画像が大きい場合はキャンバスを拡大する
-                canvas = self.doResize(canvas, addImage.size)
-            if (
-                addImage.size < canvas.size
-            ):  # 追加画像が小さい場合はキャンバスのサイズに拡大する
-                addImage = self.doResize(addImage, canvas.size)
+            # タプルの辞書順比較(> / <)は幅・高さの一方が大きいだけでTrueになり、
+            # 非対称なサイズ(例: canvas=(100,100), addImage=(120,80))で他方がクロップされるため、
+            # 幅・高さそれぞれの最大値を取って揃える。
+            max_size = (
+                max(canvas.size[0], addImage.size[0]),
+                max(canvas.size[1], addImage.size[1]),
+            )
+            if canvas.size != max_size:
+                canvas = self.doResize(canvas, max_size)
+            if addImage.size != max_size:
+                addImage = self.doResize(addImage, max_size)
             if self.offset != (0, 0):  # オフセット指定があれば追加画像をずらす
                 addImage = self.doOffset(addImage)
             # stdoutLogger.debug("'{0}' merged.".format(path))
