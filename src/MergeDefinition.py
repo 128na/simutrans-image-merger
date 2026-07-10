@@ -50,9 +50,13 @@ class MergeImage(ImageProcessor):
     def handleImage(self, canvas):
         for path in self.pathes:
             addImage = Image.open(path)
-            if addImage.size > canvas.size:  # 追加画像が大きい場合はキャンバスを拡大する
+            if (
+                addImage.size > canvas.size
+            ):  # 追加画像が大きい場合はキャンバスを拡大する
                 canvas = self.doResize(canvas, addImage.size)
-            if addImage.size < canvas.size:  # 追加画像が小さい場合はキャンバスのサイズに拡大する
+            if (
+                addImage.size < canvas.size
+            ):  # 追加画像が小さい場合はキャンバスのサイズに拡大する
                 addImage = self.doResize(addImage, canvas.size)
             if self.offset != (0, 0):  # オフセット指定があれば追加画像をずらす
                 addImage = self.doOffset(addImage)

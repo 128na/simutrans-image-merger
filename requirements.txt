@@ -1,5 +1,5 @@
-black==24.8.0
-Pillow==10.4.0
-pyinstaller==6.10.0
-pyinstaller-hooks-contrib==2024.8
-jsonschema==4.23.0
+black==26.5.1
+Pillow==12.3.0
+pyinstaller==6.21.0
+pyinstaller-hooks-contrib==2026.6
+jsonschema==4.26.0
